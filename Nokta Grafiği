@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from google.colab import drive
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+plt.figure(figsize=(15, 8))
+
+plt.scatter(df['il'], df['kayıtlı üye sayısı_20'], s=100, c=df['kayıtlı üye sayısı_20'], cmap='inferno', alpha=0.75)
+
+plt.xlabel('İl', fontsize=12, fontweight='bold')
+plt.ylabel('Kayıtlı Üye sayısı', fontsize=12, fontweight='bold')
+plt.title('Kayıtlı Üye sayısı Verileri', fontsize=14, fontweight='bold')
+
+plt.xticks(rotation=90, fontsize=8)
+
+plt.yticks(fontsize=8)
+
+plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+
+plt.gca().set_facecolor('#e0b5ca')  
+
+plt.show()
