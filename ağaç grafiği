@@ -1,0 +1,20 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+!pip install squarify
+import squarify
+from google.colab import drive
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+labels = df['il']
+sizes = df['Sanat_20']
+
+plt.figure(figsize=(15, 8))
+squarify.plot(sizes=sizes, label=labels, alpha=.8, color=plt.cm.inferno(sizes / max(sizes)))
+
+plt.axis('off')
+plt.title('Sanat Verileri Ağaç Grafiği', fontsize=14, fontweight='bold')
+
+plt.show()
