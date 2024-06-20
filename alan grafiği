@@ -1,0 +1,26 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from google.colab import drive
+
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/2018.xlsx'
+df = pd.read_excel(data_path)
+
+plt.figure(figsize=(15, 8))
+
+plt.fill_between(df['il'], df['Sanat'], color='skyblue', alpha=0.4)
+
+plt.scatter(df['il'], df['Sanat'], s=100, c=df['Sanat'], cmap='turbo', alpha=0.75)
+
+plt.xlabel('İl', fontsize=12, fontweight='bold')
+plt.ylabel('Sanat', fontsize=12, fontweight='bold')
+plt.title('Sanat Verileri - Alan Grafiği', fontsize=14, fontweight='bold')
+
+plt.xticks(rotation=90, fontsize=8)
+plt.yticks(fontsize=8)
+
+plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+
+plt.gca().set_facecolor('#d6f9de')
+plt.show()
