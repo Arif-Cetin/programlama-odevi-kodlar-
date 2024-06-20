@@ -1,0 +1,25 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from google.colab import drive
+
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+selected_columns = ['Genel_22', 'Felsefe ve psikoloji_22', 'Din_22', 'Sosyal bilimler_22', 'Dil ve dil bilim_22', 'Doğa bilimleri ve matematik_22', 'Uygulamalı bilimler ve teknoloji_22', 'Sanat_22', 'Edebiyat ve retorik_22', 'Coğrafya, tarih ve yardımcı disiplinler_22']  # Kullanmak istediğiniz sütunları burada belirtin
+
+df_selected = df[selected_columns]
+
+sns.set(style="whitegrid")
+plt.figure(figsize=(12, 8))
+
+sns.boxplot(data=df_selected, palette="Set2")
+
+plt.xticks(rotation=90, fontsize=8) 
+plt.title('2022 Yılı Kitap Konuları için Kutu Grafiği', fontsize=16)
+plt.xlabel('Konular', fontsize=14)
+plt.ylabel('Kitap Sayısı', fontsize=14)
+
+plt.show()
