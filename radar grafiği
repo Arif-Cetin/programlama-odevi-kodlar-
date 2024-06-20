@@ -1,0 +1,39 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from google.colab import drive
+
+drive.mount('/content/drive')
+data_path = '/content/drive/MyDrive/2018.xlsx'
+df = pd.read_excel(data_path)
+
+plt.figure(figsize=(12, 10))
+
+labels = df['il']
+num_vars = len(labels)
+
+angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+
+values = df['Sanat'].tolist()
+values += values[:1]
+angles += angles[:1]
+
+
+angles_deg = np.degrees(angles)
+angles_shifted = angles_deg + 90  
+
+fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
+ax.fill(angles, values, color='turquoise', alpha=0.25)
+ax.plot(angles, values, color='turquoise', linewidth=2)  
+
+
+ax.set_yticklabels([])
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels([])  
+
+for angle, label in zip(angles_shifted, labels):
+    ax.annotate(label, xy=(np.radians(angle), max(values) + 10), ha='center', va='center', fontsize=8, fontweight='bold', rotation=angle)
+
+plt.title('Sanat Verileri (Radar Grafiği)', fontsize=14, fontweight='bold')
+
+plt.show()
