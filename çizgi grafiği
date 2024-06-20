@@ -1,0 +1,26 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from google.colab import drive
+
+rive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+plt.figure(figsize=(15, 8))
+
+plt.plot(df['il'], df['kütüphane sayısı_23'], marker='o', markersize=8, linestyle='-', color='b', label='Kütüphane Sayısı')
+
+plt.xlabel('İl', fontsize=12, fontweight='bold')
+plt.ylabel('kütüphane sayısı', fontsize=12, fontweight='bold')
+plt.title('2023 Yılı Kütüphane Sayısı Çizgi Grafiği', fontsize=14, fontweight='bold')
+
+plt.xticks(rotation=90, fontsize=8)
+plt.yticks(fontsize=8)
+plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+plt.gca().set_facecolor('#d6f9de')
+plt.fill_between(df['il'], df['kütüphane sayısı_21'], color='blue', alpha=0.1)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
