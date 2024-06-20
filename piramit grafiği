@@ -1,0 +1,39 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from google.colab import drive
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+df_sorted = df.sort_values(by='kullanıcı sayısı_20', ascending=False)
+
+plt.figure(figsize=(10, 15))
+
+for i, (index, row) in enumerate(df_sorted.iterrows()):
+    plt.barh(i, row['kullanıcı sayısı_20'], color='skyblue' if i % 2 == 0 else 'salmon', alpha=0.8, label='kullanıcı sayısı')
+    plt.barh(i, -row['kitap sayısı_20'], color='lightgreen' if i % 2 == 0 else 'orchid', alpha=0.8, label='kitap sayısı')
+
+plt.xlabel('Sayı', fontsize=12, fontweight='bold')
+plt.ylabel('İl', fontsize=12, fontweight='bold')
+plt.title('Piramit Grafiği - Kullanıcı ve Kitap Sayıları', fontsize=14, fontweight='bold')
+
+plt.xticks(fontsize=10)
+plt.gca().invert_xaxis()
+
+max_value = max(df['kullanıcı sayısı_20'].max(), df['kitap sayısı_20'].max())
+plt.xlim(-max_value, max_value)
+
+plt.grid(True, axis='x', linestyle='-', alpha=0.5)
+
+plt.gca().set_facecolor('#f0f0f0')
+
+
+plt.yticks(range(len(df_sorted)), df_sorted['il'])
+
+
+plt.legend(['kullanıcı sayısı_20', 'kitap sayısı_20'], loc='lower right')
+
+
+plt.tight_layout()
+plt.show()
