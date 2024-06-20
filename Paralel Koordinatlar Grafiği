@@ -1,0 +1,26 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from google.colab import drive
+from pandas.plotting import parallel_coordinates
+
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/2018.xlsx'
+df = pd.read_excel(data_path)
+
+plt.figure(figsize=(10, 8))
+
+df_parallel = df[['il', 'kütüphane sayısı', 'kitap sayısı', 'kullanıcı sayısı', 'kayıtlı üye sayısı', 'ödünç verilen materyaller']]
+
+parallel_coordinates(df_parallel, 'il', colormap='turbo', linewidth=2)
+
+plt.xlabel('Değişkenler', fontsize=12, fontweight='bold')
+plt.ylabel('Değerler', fontsize=12, fontweight='bold')
+plt.title('Paralel Koordinatlar Grafiği - kütüphane Verileri', fontsize=14, fontweight='bold')
+
+plt.xticks(rotation=45, fontsize=10)
+
+plt.grid(True, linestyle='-', alpha=0.5)
+
+plt.gca().set_facecolor('#d6f9de')
+plt.show()
