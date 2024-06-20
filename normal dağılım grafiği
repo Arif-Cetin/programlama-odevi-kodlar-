@@ -1,0 +1,24 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from google.colab import drive
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/2018.xlsx'
+df = pd.read_excel(data_path)
+mean = df['Sanat'].mean()
+std_dev = df['Sanat'].std()
+
+gauss_data = np.random.normal(mean, std_dev, len(df))
+
+plt.figure(figsize=(15, 8))
+
+plt.hist(gauss_data, bins=30, density=True, alpha=0.6, color='g')
+
+plt.xlabel('Sanat Verileri', fontsize=12, fontweight='bold')
+plt.ylabel('Yoğunluk', fontsize=12, fontweight='bold')
+plt.title('Sanat Verilerinin Gauss Dağılımı', fontsize=14, fontweight='bold')
+
+plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+plt.gca().set_facecolor('#d6f9de')
+plt.show()
