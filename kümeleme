@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.cluster import KMeans
+from google.colab import drive
+drive.mount('/content/drive')
+
+
+data_path = '/content/drive/MyDrive/2018.xlsx'
+df = pd.read_excel(data_path)
+
+
+X = df[['Sanat']]
+
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans.fit(X)
+
+df['Cluster'] = kmeans.labels_
+
+plt.figure(figsize=(15, 8))
+
+cluster_colors = ['#FF5733', '#33FF57', '#5733FF']
+
+for cluster in range(len(cluster_colors)):
+    cluster_data = df[df['Cluster'] == cluster]
+    plt.scatter(cluster_data.index, cluster_data['Sanat'], s=100, c=cluster_colors[cluster], label=f'Küme {cluster}', alpha=0.75)
+
+plt.xlabel('Index', fontsize=12, fontweight='bold')  
+plt.ylabel('Sanat', fontsize=12, fontweight='bold')
+plt.title('K-means Kümeleme Sonucu - Sanat Verileri', fontsize=14, fontweight='bold')
+
+plt.yticks(fontsize=8)
+plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+plt.gca().set_facecolor('#d6f9de')
+plt.legend()
+plt.show()
