@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from google.colab import drive
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+df['veri_numeric'] = pd.factorize(df['Din_23'])[0]
+
+plt.figure(figsize=(15, 8))
+
+plt.hexbin(df['veri_numeric'], df['Din_23'], gridsize=20, cmap='turbo', edgecolors='face')
+
+plt.colorbar(label='Yoğunluk')
+
+plt.xlabel('İller', fontsize=12, fontweight='bold')
+plt.ylabel('Din Kitap sayısı', fontsize=12, fontweight='bold')
+plt.title('2023 Din Kitap Sayısı Grafiği', fontsize=14, fontweight='bold')
+
+plt.xticks(ticks=df['veri_numeric'], labels=df['il'], rotation=90, fontsize=8)
+
+plt.yticks(fontsize=8)
+
+plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+
+plt.gca().set_facecolor('#d6f9de')
+
+plt.show()
