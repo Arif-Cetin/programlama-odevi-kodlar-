@@ -1,0 +1,50 @@
+from google.colab import drive
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
+
+
+drive.mount('/content/drive')
+
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+
+df['kitap sayısı_20'] = pd.to_numeric(df['kitap sayısı_20'], errors='coerce')
+
+
+colors = []
+num_colors = len(df)
+for i in range(num_colors):
+    hue = i / num_colors
+    saturation = 0.5
+    value = 0.6
+    colors.append((hue, saturation, value))
+
+
+cmap = LinearSegmentedColormap.from_list('custom', colors, N=num_colors)
+
+
+plt.figure(figsize=(15, 8))
+
+
+bars = plt.bar(range(len(df)), df['kitap sayısı_20'], color=cmap(range(num_colors)))
+
+plt.xlabel('İller', fontsize=12, fontweight='bold')
+plt.ylabel('kitap Sayısı', fontsize=12, fontweight='bold')
+plt.title('2020 Kütüphane Sayısı Grafiği', fontsize=14, fontweight='bold')
+plt.xticks(range(len(df)), df['il'], rotation=90, fontsize=8)
+plt.yticks(fontsize=8)
+plt.grid(True, linestyle='-', alpha=0.5)
+plt.gca().set_facecolor((1, 1, 0.8))
+
+
+sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=0, vmax=len(df)))
+sm.set_array([])
+cbar = plt.colorbar(sm, orientation='vertical', fraction=0.05)
+cbar.set_label('İl Renkleri', fontsize=10, fontweight='bold')
+
+
+plt.tight_layout()
+plt.show()
