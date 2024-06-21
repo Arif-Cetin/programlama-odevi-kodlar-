@@ -28,17 +28,11 @@ plt.xlabel('', fontsize=12, fontweight='bold')
 plt.ylabel('kütüphane sayısı', fontsize=12, fontweight='bold')
 plt.title('2023 Kütüphane Sayısı Grafiği', fontsize=14, fontweight='bold')
 
-
-# Y ekseni etiketlerinin font boyutunu ayarlayın
 plt.yticks(fontsize=8)
 
 plt.grid(True, axis='y', linestyle='-', alpha=0.5)
 
-# Arka plan rengini ayarlayın (pastel yeşil olarak)
 plt.gca().set_facecolor('#d6f9de')
 
-# Küme etiketlerini ekle
 plt.legend()
-
-# Grafiği göster
 plt.show()
