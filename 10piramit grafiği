@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from google.colab import drive
+drive.mount('/content/drive')
+
+data_path = '/content/drive/MyDrive/veri.xlsx'
+df = pd.read_excel(data_path)
+
+df_sorted = df.sort_values(by='kullanıcı sayısı_21', ascending=False)
+
+plt.figure(figsize=(10, 15))
+
+for i, (index, row) in enumerate(df_sorted.iterrows()):
+    plt.barh(i, row['kullanıcı sayısı_21'], color='#1f77b4' if i % 2 == 0 else '#ff7f0e', alpha=0.8, label='kullanıcı sayısı')
+    plt.barh(i, -row['kitap sayısı_21'], color='#2ca02c' if i % 2 == 0 else '#d62728', alpha=0.8, label='kitap sayısı')
+
+plt.ylabel('İl', fontsize=12, fontweight='bold')
+plt.title('2021 Kullanıcı ve Kitap Sayıları Grafiği', fontsize=14, fontweight='bold')
+
+plt.xticks(fontsize=10)
+plt.gca().invert_xaxis()
+
+max_value = max(df['kullanıcı sayısı_21'].max(), df['kitap sayısı_20'].max())
+plt.xlim(-max_value, max_value)
+
+plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+
+plt.gca().set_facecolor('#f0f0f0')
+
+plt.yticks(range(len(df_sorted)), df_sorted['il'])
+
+plt.legend(['kullanıcı sayısı_21', 'kitap sayısı_21'], loc='lower right')
+
+plt.tight_layout()
+plt.show()
