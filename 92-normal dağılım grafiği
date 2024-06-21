@@ -4,10 +4,10 @@ import numpy as np
 from google.colab import drive
 drive.mount('/content/drive')
 
-data_path = '/content/drive/MyDrive/2018.xlsx'
+data_path = '/content/drive/MyDrive/veri.xlsx'
 df = pd.read_excel(data_path)
-mean = df['Sanat'].mean()
-std_dev = df['Sanat'].std()
+mean = df['Sosyal bilimler_20'].mean()
+std_dev = df['Sosyal bilimler_20'].std()
 
 gauss_data = np.random.normal(mean, std_dev, len(df))
 
@@ -15,9 +15,9 @@ plt.figure(figsize=(15, 8))
 
 plt.hist(gauss_data, bins=30, density=True, alpha=0.6, color='g')
 
-plt.xlabel('Sanat Verileri', fontsize=12, fontweight='bold')
+plt.xlabel('Kitap Sayısı', fontsize=12, fontweight='bold')
 plt.ylabel('Yoğunluk', fontsize=12, fontweight='bold')
-plt.title('Sanat Verilerinin Gauss Dağılımı', fontsize=14, fontweight='bold')
+plt.title('2023 Kitap Sayısının Normal Dağılımı', fontsize=14, fontweight='bold')
 
 plt.grid(True, axis='y', linestyle='-', alpha=0.5)
 plt.gca().set_facecolor('#d6f9de')
