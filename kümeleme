@@ -5,11 +5,11 @@ from google.colab import drive
 drive.mount('/content/drive')
 
 
-data_path = '/content/drive/MyDrive/2018.xlsx'
+data_path = '/content/drive/MyDrive/veri.xlsx'
 df = pd.read_excel(data_path)
 
 
-X = df[['Sanat']]
+X = df[['kütüphane sayısı_23']]
 
 kmeans = KMeans(n_clusters=3, random_state=42)
 kmeans.fit(X)
@@ -22,14 +22,23 @@ cluster_colors = ['#FF5733', '#33FF57', '#5733FF']
 
 for cluster in range(len(cluster_colors)):
     cluster_data = df[df['Cluster'] == cluster]
-    plt.scatter(cluster_data.index, cluster_data['Sanat'], s=100, c=cluster_colors[cluster], label=f'Küme {cluster}', alpha=0.75)
+    plt.scatter(cluster_data.index, cluster_data['kütüphane sayısı_23'], s=100, c=cluster_colors[cluster], label=f'Küme {cluster}', alpha=0.75)
 
-plt.xlabel('Index', fontsize=12, fontweight='bold')  
-plt.ylabel('Sanat', fontsize=12, fontweight='bold')
-plt.title('K-means Kümeleme Sonucu - Sanat Verileri', fontsize=14, fontweight='bold')
+plt.xlabel('', fontsize=12, fontweight='bold')
+plt.ylabel('kütüphane sayısı', fontsize=12, fontweight='bold')
+plt.title('2023 Kütüphane Sayısı Grafiği', fontsize=14, fontweight='bold')
 
+
+# Y ekseni etiketlerinin font boyutunu ayarlayın
 plt.yticks(fontsize=8)
+
 plt.grid(True, axis='y', linestyle='-', alpha=0.5)
+
+# Arka plan rengini ayarlayın (pastel yeşil olarak)
 plt.gca().set_facecolor('#d6f9de')
+
+# Küme etiketlerini ekle
 plt.legend()
+
+# Grafiği göster
 plt.show()
