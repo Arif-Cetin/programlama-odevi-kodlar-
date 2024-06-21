@@ -20,6 +20,6 @@ plt.yticks(fontsize=8)
 
 plt.grid(True, axis='y', linestyle='-', alpha=0.5)
 
-plt.gca().set_facecolor('#e0b5ca')  
+plt.gca().set_facecolor('#e0b5ca')
 
 plt.show()
