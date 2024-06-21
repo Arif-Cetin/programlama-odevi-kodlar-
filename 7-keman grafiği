@@ -3,21 +3,16 @@ import seaborn as sns
 import pandas as pd
 from google.colab import drive
 
-# Google Drive'ı bağla
 drive.mount('/content/drive')
 
-# Veriyi oku
 data_path = '/content/drive/MyDrive/veri.xlsx'
 df = pd.read_excel(data_path)
 
-# Veri çerçevesini uzun forma dönüştür
 df_melted = pd.melt(df, id_vars=['il'], value_vars=['ödünç verilen materyaller_20', 'ödünç verilen materyaller_21', 'ödünç verilen materyaller_22', 'ödünç verilen materyaller_23'],
                     var_name='Yıl', value_name='ödünç verilen materyaller')
 
-# 'Yıl' sütunundaki isimleri düzenle
 df_melted['Yıl'] = df_melted['Yıl'].str.extract('(\d+)', expand=False)
 
-# Violin plot'u oluştur
 plt.figure(figsize=(15, 8))
 sns.violinplot(x='Yıl', y='ödünç verilen materyaller', data=df_melted, inner='quartile', linewidth=1.3, palette='mako')
 
