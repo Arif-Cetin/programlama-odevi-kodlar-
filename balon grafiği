@@ -1,0 +1,29 @@
+from google.colab import drive
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import ListedColormap
+
+drive.mount('/content/drive')
+file_path = '/content/drive/My Drive/veri.xlsx'
+
+data = pd.read_excel(file_path)
+print(data.head())
+
+plt.figure(figsize=(12, 6))
+
+azot = data['kayıtlı üye sayısı_23']
+fosfor = data['kitap sayısı_23']
+potasyum = data['kullanıcı sayısı_23']
+sizes = data['kayıtlı üye sayısı_23']
+
+plt.scatter(azot, fosfor, s=sizes, c=potasyum, cmap='inferno', alpha=0.6, edgecolors='w', linewidth=0.5)
+
+plt.xlabel('kayıtlı üye sayısı')
+plt.ylabel('kitap sayısı')
+plt.colorbar(label='kullanıcı sayısı')
+plt.title('2023 Kayıtlı Üye, Kitap ve Kullanıcı Sayısı Grafiği')
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
